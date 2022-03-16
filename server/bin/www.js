@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-import app from '../app';
+import app from '@S/app';
 //Modernizando el script
 //var debug = require('debug')('projnotes:server');
 import Debug from 'debug';

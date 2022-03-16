@@ -7,5 +7,15 @@
                     }
                     }
                     ]
+                ],
+                "plugins": [
+                    [
+                        "module-resolver",{
+                            "root":"./",
+                            "alias":{
+                                "@S":"./server"
+                            }
+                        }
+                    ]
                 ]
             }
