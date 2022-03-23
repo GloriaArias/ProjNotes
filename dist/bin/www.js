@@ -1,99 +1,22 @@
 #!/usr/bin/env node
-
 /**
  * Module dependencies.
- */
-"use strict";
-
-var _app = _interopRequireDefault(require("../app"));
-
-var _debug = _interopRequireDefault(require("debug"));
-
-var _http = _interopRequireDefault(require("http"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-//Modernizando el script
+ */"use strict";var _app=_interopRequireDefault(require("../app")),_debug=_interopRequireDefault(require("debug")),_http=_interopRequireDefault(require("http"));function _interopRequireDefault(a){return a&&a.__esModule?a:{default:a}}//Modernizando el script
 //var debug = require('debug')('projnotes:server');
 //var http = require('http');
 //Creando una instancia de degger
-const debug = (0, _debug.default)("PROJNOTES:sever");
-/**
+const debug=(0,_debug.default)("PROJNOTES:sever");/**
  * Get port from environment and store in Express.
- */
-
-var port = normalizePort(process.env.PORT || '3000');
-
-_app.default.set('port', port);
-/**
+ */var port=normalizePort(process.env.PORT||"3000");_app.default.set("port",port);/**
  * Create HTTP server.
- */
-
-
-const server = _http.default.createServer(_app.default); //(req, res, next, err)=>
-
+ */const server=_http.default.createServer(_app.default);//(req, res, next, err)=>
 /**
  * Listen on provided port, on all network interfaces.
- */
-
-
-server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
-/**
+ */server.listen(port),server.on("error",onError),server.on("listening",onListening);/**
  * Normalize a port into a number, string, or false.
- */
-
-function normalizePort(val) {
-  const port = parseInt(val, 10);
-
-  if (isNaN(port)) {
-    // named pipe
-    return val;
-  }
-
-  if (port >= 0) {
-    // port number
-    return port;
-  }
-
-  return false;
-}
-/**
+ */function normalizePort(a){const b=parseInt(a,10);return isNaN(b)?a:!!(0<=b)&&b}/**
  * Event listener for HTTP server "error" event.
- */
-
-
-function onError(error) {
-  if (error.syscall !== 'listen') {
-    throw error;
-  }
-
-  var bind = typeof port === 'string' ? 'Pipe ' + port : 'Port ' + port; // handle specific listen errors with friendly messages
-
-  switch (error.code) {
-    case 'EACCES':
-      console.error(`${bind} requires elevated privileges`);
-      process.exit(1);
-      break;
-
-    case 'EADDRINUSE':
-      console.error(`${bind}  is already in use`);
-      process.exit(1);
-      break;
-
-    default:
-      throw error;
-  }
-}
-/**
+ */function onError(a){if("listen"!==a.syscall)throw a;var b="string"==typeof port?"Pipe "+port:"Port "+port;// handle specific listen errors with friendly messages
+switch(a.code){case"EACCES":console.error(`${b} requires elevated privileges`),process.exit(1);break;case"EADDRINUSE":console.error(`${b}  is already in use`),process.exit(1);break;default:throw a;}}/**
  * Event listener for HTTP server "listening" event.
- */
-
-
-function onListening() {
-  const addr = server.address();
-  const bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`;
-  debug('Listening on ' + bind);
-  console.log(`✍ Servidor escuchando 🤖👂...en ${_app.default.get("port")}`);
-}
+ */function onListening(){const a=server.address(),b="string"==typeof a?`pipe ${a}`:`port ${a.port}`;debug("Listening on "+b),console.log(`✍ Servidor escuchando 🤖👂...en ${_app.default.get("port")}`)}
