@@ -15,10 +15,11 @@ module.exports = {
     // 3. Configurando el servidor de desarrollo 
     devServer: {
         // 3.1 folder de archivos estáticos
-        static: path.join(__dirname, 'public'),
+        static: path.join(__dirname, "public"),
         // 3.2 Puerto del srvidor de desarrollo de WP (Webpack)
-        port: 8080,
+        port: 8081,
         // Definiendo host
         host: 'localhost'
+        
     }
 }
