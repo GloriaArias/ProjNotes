@@ -10,7 +10,7 @@ module.exports = {
     // 2. Especificar el archivo de salida
     output: {
         // 2.1 Ruta absoluta de la salida
-        path:path.resolve(__dirname,'pubic'),
+        path:path.resolve(__dirname,'public'),
         // 2.2 Nombre del archivo de salida
         filename: path.join('javascripts', 'bundle.js'),
         // 2.3 path publico
@@ -34,7 +34,9 @@ module.exports = {
                                     '@babel/preset-env', {
                                         modules: false,
                                         useBuiltIns: "usage",
-                                        targets: ">0.25%, not dead",
+                                        targets: {
+                                            chrome: "80",
+                                        },
                                         corejs: 3
                                     },
                                 ],
