@@ -21,7 +21,7 @@ module.exports = {
         // 3.1 folder de archivos estáticos
         static: path.join(__dirname, "public"),
         // 3.2 Puerto del srvidor de desarrollo de WP (Webpack)
-        port: 8081,
+        port: process.env.PORT || '3000',
         // Definiendo host
         host: 'localhost'
     },

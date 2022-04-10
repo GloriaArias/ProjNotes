@@ -14,9 +14,46 @@ import indexRouter from "./routes/index";
 import usersRouter from "./routes/users";
 import aboutRouter from "./routes/about";
 
+// Webpack Modules
+import webpack from 'webpack';
+import webpackDevMiddleware from 'webpack-dev-middleware';
+import WebpackHotMiddleware from 'webpack-hot-middleware';
+import webpackConfig from '../webpack.dev.config';
+import webpackDevConfig from '../webpack.dev.config';
+
+// Consultar el modo en que se está ejecutando la aplicacion
+const env = process.env.NODE_ENV || 'developement';
+
 // Aquí se crea la instancia de express
 //(req, res, next, err) => (...)
-const app = express();
+var app = express();
+
+// Verificando el modo de ejecución de la aplicación
+if(env === 'development') {
+  console.log('> Executing in Development Mode: Webpack Hot Reloading');
+  // Paso 1. Agregando la ruta del HMR
+  // reload= true: Habilita la recarga del frontend cuando hay cambios en
+  // el código fuente del frontend
+  // timeout=1000: Tiempo de espera entre recarga y recarga de la página
+  webpackConfig.entry = ['webpack-hot-middleware/client?reload=true&timeout=1000', webpackConfig.entry];
+
+  // Paso 2. Agregamos el plugin
+  webpackConfig.plugins.push(new webpack.HotModuleReplacementPlugin());
+
+  // Paso 3. Crear el compilador de webpack
+  const compiler = webpack(webpackConfig);
+
+  // Paso 4. Agregando el Middleware a la cadena de Middlewares de nuestra aplicacion
+  app.use(webpackDevMiddleware(compiler,{
+    publicPath: webpackDevConfig.output.publicPath
+  }));
+
+  // Paso 5. Agregando el webpack Hot Middleware
+  app.use(WebpackHotMiddleware(compiler));
+}
+else{
+  console.log('> Executing in Production Mode...');
+}
 
 // Configuración del motor de plantillas (template engine)
 // view engine setup

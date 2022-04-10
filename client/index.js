@@ -1,7 +1,10 @@
+// Incorporando estilos a mi bundle
+import './styles/style.css'
+
 console.log("🎁 Webpack Working!!!");
 
 // Default parameters
-let show = (m= "😝") => {
+let show = (m= "Hot Module Replacement Working") => {
     alert(m)
 };
 show();
