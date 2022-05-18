@@ -1,13 +1,15 @@
 #!/usr/bin/env node
+/*eslint-disable no-console */
+/*eslint-disable import/no-unresolve*/
 
 /**
  * Module dependencies.
  */
 
-import app from '@S/app';
-//Modernizando el script
-//var debug = require('debug')('projnotes:server');
-import Debug from 'debug';
+import app from "@S/app";
+// Modernizando el script
+// var debug = require('debug')('projnotes:server');
+import Debug from "debug";
 //var http = require('http');
 import http from "http";
 
@@ -18,8 +20,8 @@ const debug = Debug ("PROJNOTES:sever")
  * Get port from environment and store in Express.
  */
 
-var port = normalizePort(process.env.PORT || '3000');
-app.set('port', port);
+const port = normalizePort(process.env.PORT || "3000");
+app.set("port", port);
 
 /**
  * Create HTTP server.
@@ -32,8 +34,8 @@ const server = http.createServer(app); //(req, res, next, err)=>
  */
 
 server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
+server.on("error", onError);
+server.on("listening", onListening);
 
 /**
  * Normalize a port into a number, string, or false.
@@ -60,17 +62,15 @@ function normalizePort(val) {
  */
 
 function onError(error) {
-  if (error.syscall !== 'listen') {
+  if (error.syscall !== "listen") {
     throw error;
   }
 
-  var bind = typeof port === 'string'
-    ? 'Pipe ' + port
-    : 'Port ' + port;
+  var bind = typeof port === "string" ? "Pipe " + port : "Port " + port;
 
   // handle specific listen errors with friendly messages
   switch (error.code) {
-    case 'EACCES':
+    case "EACCES":
       console.error( `${bind} requires elevated privileges`);
       process.exit(1);
       break;
@@ -89,7 +89,7 @@ function onError(error) {
 
 function onListening() {
   const addr = server.address();
-  const bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}` ;
-  debug('Listening on ' + bind);
+  const bind = typeof addr === "string" ? `pipe ${addr}` : `port ${addr.port}` ;
+  debug(`Listening on ${bind}`);
   console.log(`✍ Servidor escuchando 🤖👂...en ${app.get("port")}`);
 }

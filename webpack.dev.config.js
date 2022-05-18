@@ -1,53 +1,54 @@
 // Importando dependencia path
 // dependencia del core de Node
-const path = require('path');
+const path = require("path");
 // Plugins para Webpack
-const MiniCssExtractPlugin = require('mini-css-extract-plugin')
+const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 //Agregando soporte para Eslint
-const EslintWebpackPlugin = requiere('eslint webpack plugin');
+const EslintWebpackPlugin = require('eslint-webpack-plugin');
 
 module.exports = {
     // 1. Especificar el archivo de entrada
-    entry: './client/index.js',
+    entry: "./client/index.js",
     // 2. Especificar el archivo de salida
     output: {
         // 2.1 Ruta absoluta de la salida
-        path:path.resolve(__dirname,'pubic'),
+        path: path.resolve(__dirname, "public"),
         // 2.2 Nombre del archivo de salida
-        filename: path.join('javascripts', 'bundle.js'),
+        filename: path.join("javascripts", "bundle.js"),
         // 2.3 path publico
-        publicPath: '/'
+        publicPath: "/",
     },
     // 3. Configurando el servidor de desarrollo 
     devServer: {
         // 3.1 folder de archivos estáticos
         static: path.join(__dirname, "public"),
         // 3.2 Puerto del srvidor de desarrollo de WP (Webpack)
-        port: process.env.PORT || '3000',
+        port: 8080,
         // Definiendo host
-        host: 'localhost'
+        host: "localhost",
     },
 
     //4. Modulos
 
     module: {
         rules: [
+            // 4.1 Regla para Babel
             {
                 test: /\.js$/,
                 exclude: /node_modules/,
                 use: [
                     //4.1.1 Primer stage
                     {
-                        loader: 'babel-loader',
+                        loader: "babel-loader",
                         options: {
                             presets:[
                                 [
-                                    '@babel/preset-env', {
+                                    "@babel/preset-env", {
                                         modules: false,
-                                        useBuiltIns: 'usage',
+                                        useBuiltIns: "usage",
                                         targets: {
-                                            chrome: "80",
+                                            "chrome": "80"
                                         },
                                         corejs: 3,
                                     },
@@ -62,13 +63,13 @@ module.exports = {
             {
                 test: /\.css$/,
                 use: [MiniCssExtractPlugin.loader,
-                'css-loader']
+                'css-loader'],
             },
         ],
     },
     //4. Plugins
     plugins: [new MiniCssExtractPlugin({
-        filename: path.join('stylesheets','styles.css'),
+        filename: path.join("stylesheets", "styles.css"),
         }),
     
         new EslintWebpackPlugin()
