@@ -1,40 +1,41 @@
 #!/usr/bin/env node
-/* eslint-disable no-console */
 
 /**
  * Module dependencies.
  */
 
 import app from '@S/app';
-// Modernizando el script
-// var debug = require('debug')('projnotes:server');
 import Debug from 'debug';
-// var http = require('http');
 import http from 'http';
 
-// Creando una instancia de degger
-const debug = Debug('PROJNOTES:sever');
+// Importando nuestro logger
+import winston from '../config/winston';
+
+// Creando instancia del debugger
+const debug = Debug('projnotes-2022a:server');
 
 /**
  * Get port from environment and store in Express.
  */
 
 const port = normalizePort(process.env.PORT || '3000');
+// app es una instnacia de ExpressJs[ ] [ NODE ]
 app.set('port', port);
 
 /**
  * Create HTTP server.
  */
 
-const server = http.createServer(app); // (req, res, next, err)=>
+const server = http.createServer(app); // (req, res, next, err)=> {}
 
 /**
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
-server.on('error', onError);
-server.on('listening', onListening);
+server.listen(port); // Pone al server a escuchar
+// Se registran eventos
+server.on('error', onError); // En caso de error
+server.on('listening', onListening); // Cuando esta escuchando
 
 /**
  * Normalize a port into a number, string, or false.
@@ -70,11 +71,11 @@ function onError(error) {
   // handle specific listen errors with friendly messages
   switch (error.code) {
     case 'EACCES':
-      console.error(`${bind} requires elevated privileges`);
+      winston.error(`Port: ${bind} requires elevated privileges`);
       process.exit(1);
       break;
     case 'EADDRINUSE':
-      console.error(`${bind}  is already in use`);
+      winston.error(`Port: ${bind} is already in use`);
       process.exit(1);
       break;
     default:
@@ -90,5 +91,5 @@ function onListening() {
   const addr = server.address();
   const bind = typeof addr === 'string' ? `pipe ${addr}` : `port ${addr.port}`;
   debug(`Listening on ${bind}`);
-  console.log(`✍ Servidor escuchando 🤖👂...en ${app.get('port')}`);
+  winston.info(`Servidor escuchando 🤖🦻...en ${app.get('port')}`);
 }
