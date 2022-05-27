@@ -18,10 +18,10 @@ const index = (req, res) => {
   // View-Models
   const viewModel = {
     title: 'Index Controller Working!!!',
-    author: 'Ivan Rivalcoba',
+    author: 'Gloria Arias',
     emojie,
   };
-  res.render('index', viewModel);
+  res.render('home/indexView', viewModel);
 };
 
 // URL: Get /about
