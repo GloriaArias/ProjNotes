@@ -30,6 +30,9 @@ const about = (req, res) => {
     name: 'PhD Gloria Arias',
     email: 'ariasutreragloria@gmail.com',
     url: 'https://github.com/GloriaArias/ProjNotes/commits/dev',
+    description:
+      'Aplicación que te permite registrar ideas de proyectos. PwpcII-2022A',
+    version: '0.0.alpha',
   });
 };
 
