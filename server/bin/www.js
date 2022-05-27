@@ -4,7 +4,7 @@
  * Module dependencies.
  */
 
-import app from '@S/app';
+import app from '@s/app';
 import Debug from 'debug';
 import http from 'http';
 
@@ -12,7 +12,7 @@ import http from 'http';
 import winston from '../config/winston';
 
 // Creando instancia del debugger
-const debug = Debug('projnotes-2022a:server');
+const debug = Debug('PROJNOTES:server');
 
 /**
  * Get port from environment and store in Express.

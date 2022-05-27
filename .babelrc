@@ -1,24 +1,28 @@
 {
     "presets": [
-        [
-            "minify"
-        ],
-        [
-            "@babel/preset-env",
-            {
-                "targets": {"node": "current"
-                    }
-                    }
-                    ]
-                ],
-                "plugins": [
-                    [
-                        "module-resolver",{
-                            "root":"./",
-                            "alias":{
-                                "@S":"./server"
-                            }
-                        }
-                    ]
-                ]
-            }
+      [
+        "minify",{
+          "builtIns": false,
+          "evaluate": false,
+          "mangle": false
+        }
+      ],
+      [
+        "@babel/preset-env",
+        {
+          "targets": { "node": "current" }
+        }
+      ]
+    ],
+    "plugins": [
+      [
+        "module-resolver",
+        {
+          "root": "./",
+          "alias": {
+            "@s": "./server"
+          }
+        }
+      ]
+    ]
+  }
