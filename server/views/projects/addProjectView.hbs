@@ -18,15 +18,40 @@
                      type="text" 
                      id="project-name" 
                      name="name" 
-                     class="validate">
+                     class="validate"
+                     value="{{project.name}}"
+                     required
+                     />
+                     <div 
+                     class="helper-text"
+                     data-error="Debe ingresar nombre al proyecto"
+                     data-success="Correcto"></div>
+                     </div>
+                      {{#if errorModel.nameError}}
+                      <span style="color: red;">
+                          Error: {{errorModel.nameError}}
+                          </span>
+                      {{/if}}
                 </div>
                 <div class="input-field">
                     <label for="project-description">
                         Descripción
                     </label>
-                    <textarea name="description"
+                    <textarea
+                    name="description"
                     id="project-description"
-                    class="materialize-textarea"></textarea>
+                    class="materialize-textarea"
+                    required
+                    >{{project.description}}</textarea>
+                    <span
+                     class="helper-text"
+                     data-error="Debe ingresar descripción al proyecto"
+                     data-success="Correcto"></span>
+                    {{#if errorModel.descriptionError}}
+                    <span style="color: red;">
+                        Error: {{errorModel.descriptionError}}
+                    </span>
+                    {{/if}}
                 </div>
             </div>
             <div class="card-action">
