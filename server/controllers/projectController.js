@@ -1,4 +1,5 @@
 import log from '../config/winston';
+import ProjectModel from '../models/ProjectModel';
 
 /* Action Methods */
 // Lista los proyectos
@@ -17,13 +18,13 @@ const add = (req, res) => {
 
 // Procesa el formulario que Agrega ideas de Proyectos
 // POST /projects/add
-const addPost = (req, res) => {
+const addPost = async (req, res) => {
   const { errorData } = req;
   // Crar view models para este action mehtod
   let project = {};
   let errorModel = {};
   if (errorData) {
-    log.info('Se retorna objeto de error de validacion');
+    log.error('💥 Se retorna objeto de error de validacion 💥');
     // Rescatando el objeto validado
     project = errorData.value;
     // Usamos un reduce para generar un objeto
@@ -41,15 +42,31 @@ const addPost = (req, res) => {
     // res.status(200).json(errorData);
   } else {
     log.info('Se retorna objeto Project valido');
-    // Desestructurando la información del formulario
+    // Desestructurando la información del formulario del objeto valido
     const { validData } = req;
-    // Regresar un objeto con los datos obtenidos del formulario
-    // res.status(200).json({ project });
-    project = validData;
+    // Crar un documento con los datos provistos
+    // por el formulario y guardar dicho documento
+    // en projectModel
+    const projectModel = new ProjectModel(validData);
+    // Siempre que se ejecuta una operacion
+    // que depende de un tercero, es una buena practica
+    // envolver esa operacion en un bloque try
+    try {
+      // Se salva el documento project
+      log.info('Se salva objeto Project');
+      project = await projectModel.save();
+    } catch (error) {
+      log.error(
+        `Ha fallado el intento de salvar un proyecto: ${error.message}`
+      );
+      return res.status(500).json({ error });
+    }
   }
   // Respondemos con los viewModels generados
-  res.render('projects/addProjectView', { project, errorModel });
+  // res.render('projects/addProjectView', { project, errorModel });
   // res.status(200).json({ project, errorModel });
+  // Sanity check TODO:Provisional
+  return res.status(200).json({ project, errorModel });
 };
 
 // Exportando el controlador
